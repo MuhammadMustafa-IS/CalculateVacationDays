@@ -24,7 +24,18 @@ function groupUsedDays(vacations) {
   }, {});
 }
 
-function calculateTimeOff(hireDateStr, currentDateStr, vacationsTaken) {
+function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // months are 0-indexed
+  const day = String(today.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function calculateTimeOff(hireDateStr, vacationsTaken, currentDateStr = null) {
+  if (!currentDateStr) {
+    currentDateStr = getCurrentDate();
+  }
   const hireDate = new Date(hireDateStr);
   const currentDate = new Date(currentDateStr);
 
